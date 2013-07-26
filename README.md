@@ -19,7 +19,7 @@ AUTHORS
 
 LINKS
 ===============
-* http://charette.no-ip.com:81/dcitu/index.html
+* 
 
 
 
