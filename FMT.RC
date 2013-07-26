@@ -1,0 +1,3 @@
+#include <os2.h>
+
+DEFAULTICON FMT.ICO

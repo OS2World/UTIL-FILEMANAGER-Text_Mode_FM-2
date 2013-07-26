@@ -1,0 +1,58 @@
+      FMT is Free Software from Mark Kimes
+      ====================================
+
+FMT is the FM/2 Tiny Textmode file manager, for use on those occasions
+when you have to boot to a text-only OS/2 command prompt.  Its footprint
+(size and memory usage) is very small, so it can easily be run from
+diskette.  Multi-file operations are multithreaded, so you don't have to
+wait on the program while it's doing work that may take considerable
+time.  FMT is page tuned, which means it uses even less memory and loads
+even faster than just looking at the size of the program might lead you
+to believe.
+
+This document is mercifully brief because the online help covers most
+topics.  Besides, the program is intentionally very simple to make it
+easy to use -- you'll only need it when disaster has struck and PM is
+unavailable, after all!
+
+You can get command line help and version information for FMT by typing
+"FMT /?" and then pressing the Enter (or Return) key.  Usage help is
+available online by pressing the F1 key.  This simply displays a
+scrollable file called "FMTHLP.TXT", which can be customized or examined
+independently of FMT with a text editor or viewer, from the directory
+holding FMT.EXE.  I recommend you take the time to read through this
+help one time -- no need to memorize everything, just familiarize
+yourself with what's available so you know to look later if you need a
+particular function.
+
+FMT can be customized somewhat using a plain text configuration file
+named "FMT.CFG".  You can create one of these files by pressing Shift+F2
+while running FMT -- this saves the current state of the program.  You
+can then edit the file with a standard text editor, if desired.  FMT
+looks for this file in the same directory that contained the executable.
+
+FMT can be run in any screen mode you can muster in a windowed or full
+screen session, up to 160 characters wide (see SMODE in the FM/2
+Utilities for an easy way to list and use alternate screen modes --
+43x132 is nice if you have a big monitor).
+
+In the archive are two .CMD files that you might find useful.  FMTCD.CMD
+can be used to allow FMT to alter the default directory after FMT is
+done running to be whatever it is when you exit the program.  IOW, it'll
+act like an enhanced CD command.  FMTRD.CMD can be used to make FMT act
+like a simple viewer (no file management) -- it will just view whatever
+file you give it on the command line, and the program will end when you
+quit the viewer.  Both of these .CMD files should be edited by you to
+replace the drive and path to certain files with what you're actually
+using on your system (probably A:\).  There's a note in the comments of
+the .CMD files to explain.  They probably won't work for you without
+this edit, but relax, it's easy, there's not even any REXX involved. You
+don't _have_ to use the .CMD files -- you can just type FMT.  They're
+just there to make things easier and more flexible for you.
+
+FMT does NOT contain all the options and power of FM/2.  It's designed
+for the purpose stated in the first paragraph above, not as a general
+purpose file manager for all occasions.
+
+
+hec@hectorplasmic.com

@@ -1,0 +1,22 @@
+
+FMT Change Log
+================
+
+Wed Apr 02 20:38:53 PDT 2003 Steven H. Levine <steve53@earthlink    >
+
+	* Release Version - 1.00
+
+Wed Sep 11 17:44:25 PDT 2002 Steven H. Levine <steve53@earthlink    >
+
+	* Release Version - 0.02
+
+	* Update FMTHLP.TXT
+
+Tue Sep 25 12:20:36 PDT 2001 Steven H. Levine <steve53@earthlink    >
+
+	* Release Version - 0.01
+
+	* Build with VAC 3.08
+
+$TLIB$: $ &(#) %n - Ver %v, %f $
+TLIB: $ &(#) History.Txt - Ver 3, 02-Apr-03,20:39:10 $

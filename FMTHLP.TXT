@@ -1,0 +1,239 @@
+             *=*=*=*=FMT is free software from Mark Kimes.=*=*=*=*
+Function keys:
+        Plain             Shift             Ctrl              Alt
+        ================= ================= ================= =================
+  F1  = help              swap target/curr  assign target dir list saved dirs
+  F2  = rescan            rewrite FMT.CFG   save dir1         recall save dir1
+  F3  = exit program      invert sort       save dir2         recall save dir2
+  F4  = view file         set viewer        save dir3         recall save dir3
+  F5  = edit file         set editor        save dir4         recall save dir4
+  F6  = copy marked files sort filename     save dir5         recall save dir5
+  F7  = move marked files sort size         save dir6         recall save dir6
+  F8  = rename file       sort date         save dir7         recall save dir7
+  F9  = command line      command processor save dir8         recall save dir8
+  F10 = change Drive      toggle info       save dir9         recall save dir9
+  F11 = attributes        toggle hid/sys    save dir10        recall save dir10
+  F12 = touch filedates   toggle dirs top   save dir11        recall save dir11
+Other keys:
+  Delete   = delete marked files            Return = default action
+  Spacebar = toggle marking on file         /      = mark all
+  ?        = unmark all                     |      = invert markings
+  \        = root directory                 >      = mark files using mask
+  <        = unmark files using mask        Left   = back one directory level
+  Right    = up one directory level         Alt+G  = Go to another directory
+  Alt+H    = Hide marked files              Alt+I  = Information on a drive
+  Alt+N    = make a New directory           Alt+P  = Print marked files
+  Alt+S    = Show files in all subdirs      Alt+T  = type in Target directory
+  Alt+Z    = show all files on many drives  Ctrl+G = Go to directory via tree
+  Ctrl+T   = change Target dir via tree     Ctrl-Z = Reset/rescan tree
+  Others   = try to match a name in list
+Alternate keys for some functions:
+  Alt+A    = Attribute edit                 Alt+C  = Copy marked files
+  Alt+D    = change Drive                   Alt+E  = Edit file
+  Alt+J    = shell to OS/2                  Alt+M  = Move marked files
+  Alt+R    = Rename file                    Alt+V  = View file
+  Alt+X    = eXit program                   Ctrl+D = Delete marked files
+  Escape   = back one directory level       TAB    = command line
+
+About default actions:
+=====================
+The default action (what happens when you press the Return key) depends
+on what the current file object is.  If the highlighted object is a
+directory, it's the same as pressing the right arrow -- you move into
+that directory.  If it's an executable file (including batch files), the
+file is executed.  Otherwise, the file is viewed.  FMT has a simple
+internal viewer, but you can plug in your own using FMT.CFG (press
+Shift+F2 to create an FMT.CFG that you can then edit -- note that FMT
+reads this configuration file only on startup).  Press Shift+F4 to set a
+new viewer while FMT is running.  Don't forget to press Shift+F2 if you
+want to save it, unless you have AUTOSAVECFG in FMT.CFG.
+
+About target directory:
+======================
+When FMT copies or moves files, it does so from the current directory
+(the one which holds the files you're looking at in the main window) to
+the target directory (listed on the second-to-last line of the screen).
+The target directory can be set by pressing Ctrl+F1, which makes the
+current directory the new target directory.  You can also swap the
+current and target directories with Shift+F1.  Finally, you can type in
+the pathname of a new target directory using Alt+T (it'll be created if
+it doesn't already exist).  You can enter a default target directory
+into FMT.CFG if you like.
+
+About saved directories:
+=======================
+You can save eleven directories for instant recall.  You save the
+current directory to one of the slots using Ctrl+F2 through Ctrl+F12.
+You recall one of those saved directories by using Alt+F2 through
+Alt+F12.  Alt+F1 can be used to list the currently saved directories to
+refresh your memory.  You can enter directories into FMT.CFG so that
+they'll be loaded each time you start FMT, if you like.
+
+About editing files:
+===================
+FMT has no internal editor.  By default, it will use T2.EXE (T/2 by Tim
+Baldwin, which comes with OS/2), but you can enter an editor to be used
+in its place into FMT.CFG if you like.  Press Shift+F5 to set a new
+editor while FMT is running.
+
+About editing text:
+==================
+When entering text into FMT, F1 inserts the current directory name, F2
+inserts the current filename, F4 inserts the current target name, Ctrl+Y
+clears the current input, Tab attempts to complete the last word at the
+cursor position by matching a filename, and other arrow/etc. keys behave
+as might be expected.  The entry area is scrollable, if the input can
+exceed the width of your screen. If you are entering text to be found in
+a file in the viewer, you can use C-like escape codes (i.e. \r for a
+carriage return, \x1b for an Escape character).  Note that this means
+that a plain backslash (\) must be entered as two backslashes (\\).  If
+you are entering a filter (Alt+F) or command line (TAB or F9), the up
+and down arrows cycle through up to the last 25 entries.
+
+About confirmations:
+===================
+When asked to confirm an action (for example, "Copy 3 marked files?"),
+respond with either "Y" or the Return key to answer in the affirmative,
+and either "N" or the Escape key to answer in the negative.  Actions
+copy, move and delete are confirmed by FMT.  Copy and move confirmations
+are followed by a question asking if you want to overwrite any existing
+files.  You are informed if any existing files were detected, but you
+are always asked, since many background threads can be running
+simultaneously and could result in conflicts occuring after the process
+has begun.  F3 at this second confirmation will abort the command, since
+Escape means "no, don't overwrite."
+
+About marking files:
+===================
+The copy, move, delete, print and touch commands operate on marked
+files, if any are marked -- otherwise they operate on the current file.
+All other commands that work on selections from the file object listing
+area always work on the current (inverse highlighted) file. There are a
+variety of ways to mark files -- the simplest is to press the spacebar
+to mark or unmark the current file.  Marked file objects are displayed
+in a different color than their unmarked counterparts.  I suppose this
+is a good time to mention that files and directories are displayed in
+different colors, too, so you can easily tell the difference at a
+glance.  Note that the '/' command will mark only files if the current
+file object is a file, or only directories if the current file object
+is a directory.
+
+About matching files via keyboard input:
+=======================================
+When you type a key that's not a command, FMT tries to find a matching
+filename in the file listing area.  You can type as many characters as
+you like, and FMT will try to find a name starting with those
+characters.  During this process, FMT shows you what you've typed so far
+on the line that usually shows the target directory.  There's a timer on
+this, so the input will disappear after a couple of seconds with no
+further input.  You can edit what you've typed using the backspace key
+to delete the last character, or Ctrl+Y to clear the input entirely. You
+can enter any command you like, including keys that scroll through the
+list, during this time without having to clear the input first -- that's
+done automatically for you.  EXCEPTIONS:  The spacebar enters a space
+rather than marking a file, the backslash (\) key enters a backslash
+rather than switching to the root directory while this find is in
+progress, and the Escape key will clear the input.  Try it, it's simpler
+to see than to explain.
+
+About editing file object attributes:
+====================================
+In this "dialog," use the spacebar to toggle attributes from off (-) to
+on (x) and vice versa.  Use the up and down arrows to move the cursor.
+Press the Return key to accept the changes, or Escape to abort.
+
+About refreshing:
+================
+FMT does the work for potentially slow operations in background threads.  
+This means you can go on to the next task while FMT is still working on the 
+last task.  However, it also means that the screen display might not match 
+actual disk content.  For example, after a file is deleted, it will still 
+appear on the display.
+
+When you need to be sure that the display is synchonized with the disk, just 
+press the F2 key.
+
+About finding files:
+===================
+Use FMT's Alt+S (Show all files in all subdirectories) to find any file
+on any subdirectory of a drive.  Switch to the root directory (\), type
+the name of the file desired as the filter (Alt+F), then press Alt+S.
+Other uses for this feature are left to the user's imagination -- you'll
+undoubtedly think of some I didn't.  You can do the same thing on more
+than one drive using Alt+Z.
+
+Warning about Alt+Z and Alt+S:
+=============================
+Since you're going to be running FMT when you boot from diskettes, you
+won't have a swap file.  These commands can consume a lot of memory,
+depending on how many files you have.  Be careful.  FMT may not display
+all matching files if it runs out of memory.  Use of a filter to pare
+the number of files in the file object listing area may help a lot.
+
+About Scroll Lock:
+=================
+If Scroll Lock is on, FMT will START programs.  If it is off, it will
+run them through the default OS/2 shell.
+
+FMT.CFG hint:
+============
+Make one with Shift+F2 and look at it with a text editor.  There are
+some things documented in there that aren't in here.
+
+Description of main window:
+==========================
+Below is a labelled diagram of the main FMT window (the one you see when
+FMT starts up).
+
+        ÚÄDate of current file object
+        ³        ÚÄSize of current file object
+        ³        ³               ÚÄEA size of current file object
+        ³        ³               ³       ÚÄAttribute of current file object
+        ³        ³               ³       ³
+  ÚÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄ¿
+  ³     ³        ³               ³       ³   ÄÄÄÄÅÄÄName of current file object
+  ÃÄÄÄÄÄÅÄÄÄÄÄÂÄÄÅÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÅÄÄÄÄÂÄÄÅÄÄÄÄÄÄÄ´
+  ³           ³             ³         ³          ³
+  ÃÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄ´
+  ³                                              ³
+  ³                                              ³
+  ³                                              ³
+  ³                                              ³
+  ³                                              ³
+  ³                                              ³
+  ³                                              ³
+  ³                                          ÄÄÄÄÅÄÄFile object listing area
+  ³                                              ³
+  ³                                              ³
+  ³                                              ³
+  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  ³                                          ÄÄÄÄÅÄÄTarget directory pathname
+  ÃÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  ³ ³             ³          ³                   ³
+  ÃÅÁÄÄÄÅÄÄÄÄÄÄÄÄÄÁÄÄÄÄÅÄÄÄÄÄÁÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+  ³³    ³              ³           ³         ÄÄÄÄÅÄÄBackground thread msgs
+  ÀÅÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  (copies, moves, etc.)
+   ³    ³              ³           ³
+   ³    ³              ³           ÀÄBytes in current directory/marked bytes
+   ³    ³              ÀÄNumber of files in current directory/marked files
+   ³    ³
+   ³    ÀÄBytes free on target drive
+   ÀÄTarget drive letter
+
+The number of files and bytes are those displayed in the file object
+listing area, with filtering applied -- actual total size of the
+directory may vary from what's shown, if you're excluding anything.  An
+"F" appears at the bottom right corner of the screen when you are
+filtering.  As in FM/2, you can use multiple filters separated by
+semi-colons.
+
+Sizes displayed in the file object listing area reflect a combination of
+file and EA sizes.  The status areas at the top of the window show the
+sizes for the current file object broken out into file size and EA size.
+
+When background threads are doing work, messages from them appear on the
+bottom line of the screen.  You can abort further action by a background
+thread by exiting the program (F3 -- Alt+X will prompt you before
+exiting if background threads are active).  When this line is not in use
+by background threads, it displays quick function key help.
+

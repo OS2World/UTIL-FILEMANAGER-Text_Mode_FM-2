@@ -1,0 +1,54 @@
+# makefile - make fmt.exe
+# Copyright (c) 1997, 2001 Mark Kimes
+# Copyright (c) 2001 Steven Levine & Associates, Inc.
+
+DEBUG=0
+BASE=fmt
+
+!IF $(DEBUG)
+CFLAGS = -DDEBUG /G5 /Gm+ /Gs- /Mp /O- /Q+  /Sm /Ss /Ti+ /W3 /C .\$*.c
+!ELSE
+CFLAGS = /G5 /Gm+ /Gs- /Gt- /Mp /O+ /Q+ /Sm /Ss /W3 /C .\$*.c
+!ENDIF
+
+!IF $(DEBUG)
+LFLAGS = /DE /EXEPACK /MAP /PMTYPE:VIO
+!ELSE
+LFLAGS = /EXEPACK:2 /MAP /PMTYPE:VIO
+!ENDIF
+
+.SUFFIXES: .c .rc
+
+.c.obj:
+    icc $(CFLAGS)
+
+OFILES=$(BASE).obj viewer.obj misc.obj init.obj edit.obj thread.obj window.obj seldom.obj tree.obj
+
+ALL: $(BASE).EXE
+
+$(BASE).exe: $(OFILES) $(BASE).def $(BASE).res
+    @REM @<<$(BASE).@0
+    $(LFLAGS)
+    $(OFILES)
+    $(BASE).def
+<<
+    type $(BASE).@0
+    ilink @$(BASE).@0
+    rc $(BASE).res $(BASE).exe
+
+$(BASE).res: $(BASE).rc
+  rc -r -x2 $(BASE).rc $(BASE).res
+
+$(BASE).obj:  $(BASE).h
+viewer.obj:   $(BASE).h
+misc.obj:     $(BASE).h
+init.obj:     $(BASE).h
+edit.obj:     $(BASE).h
+thread.obj:   $(BASE).h
+seldom.obj:   $(BASE).h
+tree.obj:     $(BASE).h
+window.obj:   window.h
+
+###########################################################################
+#                       E N D   O F   S O U R C E                         #
+###########################################################################
